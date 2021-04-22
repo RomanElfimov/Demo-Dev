@@ -24,7 +24,8 @@ class SplashScreenViewController: UIViewController {
                 
                 // В зависимотси от того, есть у нас в БД deviceUID или нет, переходим на разные экраны
                 // (Например после регистрации пользователь не выбрал устройтво6 а закрыл приложение)
-                self?.ref = Database.database().reference(withPath: "users")
+                guard let currentUser = Auth.auth().currentUser else { return }
+                self?.ref = Database.database().reference(withPath: "users")//.child(currentUser.uid)
                 self?.ref.observe(.value) { (snapshot) in
                     
                     for item in snapshot.children {

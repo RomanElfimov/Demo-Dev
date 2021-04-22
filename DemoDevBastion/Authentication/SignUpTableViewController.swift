@@ -96,11 +96,19 @@ class SignUpTableViewController: UITableViewController {
                 return
             }
             
-//            // TODO: 2
-//            // save to data base
-            let user = User(email: userEmail, name: username, surname: userSurname, accessLevel: self.accessLevel, deviceUID: "")
-            let userRef = self.ref.child(user.surname.lowercased())
-            userRef.setValue(["email": user.email, "name": user.name, "surname": user.surname, "accessLevel": user.accessLevel, "deviceUID": user.deviceUID])
+
+            guard let currentUser = Auth.auth().currentUser else { return }
+            
+            print("AUTH RESULT \(authResult?.user.uid)")
+            
+//            user = AppUser(user: currentUser)
+//            //Поочередно добираемся до   users - user - tasks
+//            ref = Database.database().reference(withPath: "users").child(String(user.uid)).child("tasks")
+            
+            let user = User(email: userEmail, name: username, surname: userSurname, accessLevel: self.accessLevel, deviceUID: "", userID: authResult!.user.uid)
+            
+            let userRef = self.ref.child(authResult!.user.uid)
+            userRef.setValue(["email": user.email, "name": user.name, "surname": user.surname, "accessLevel": user.accessLevel, "deviceUID": user.deviceUID, "userID": user.userID])
 
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
             guard let navVC = storyboard.instantiateViewController(identifier: "ActiveDevicesListViewController") as? UINavigationController else { return }

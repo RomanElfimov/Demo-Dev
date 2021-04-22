@@ -16,16 +16,18 @@ struct User {
     let surname: String
     let accessLevel: String
     let deviceUID: String
+    let userID: String
     
-    let ref: DatabaseReference?
+//    let ref: DatabaseReference?
     
-    init(email: String, name: String, surname: String, accessLevel: String, deviceUID: String) {
+    init(email: String, name: String, surname: String, accessLevel: String, deviceUID: String, userID: String) {
         self.email = email
         self.name = name
         self.surname = surname
         self.accessLevel = accessLevel
         self.deviceUID = deviceUID
-        self.ref = nil
+        self.userID = userID
+//        self.ref = nil
     }
     
     init(snapshot: DataSnapshot) {
@@ -35,6 +37,7 @@ struct User {
         surname = snapshotValue["surname"] as! String
         accessLevel = snapshotValue["accessLevel"] as! String
         deviceUID = snapshotValue["deviceUID"] as! String
-        ref = snapshot.ref
+        userID = snapshotValue["userID"] as! String
+//        ref = snapshot.ref
     }
 }

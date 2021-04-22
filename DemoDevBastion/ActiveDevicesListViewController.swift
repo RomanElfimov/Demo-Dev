@@ -11,8 +11,6 @@ import Firebase
 
 class ActiveDevicesListViewController: UIViewController {
     
-    public var surname: String = ""
-    
     // MARK: - Private Properties
     private var mqtt: CocoaMQTT!
     private var devicesUIDsArray: [String] = [] // массив, т.к. устройств может быть несколько
@@ -32,6 +30,9 @@ class ActiveDevicesListViewController: UIViewController {
         receiveMessage()
         
         tableView.tableFooterView = UIView()
+        
+        guard let currentUser = Auth.auth().currentUser else { return }
+        ref = Database.database().reference(withPath: "users").child(currentUser.uid)
         
     }
     
@@ -112,20 +113,20 @@ extension ActiveDevicesListViewController: UITableViewDelegate, UITableViewDataS
         guard let navVC = storyboard.instantiateViewController(identifier: "DeviceControlViewController") as? UINavigationController else { return }
         
         
-        ref.observe(.value) { (snapshot) in
-     
-            for item in snapshot.children {
-                //Получаем данные
-                let userData = User(snapshot: item as! DataSnapshot)
-                
-                
-                
-                self.ref = Database.database().reference(withPath: "users").child(userData.surname.lowercased())
-            }
-            
-            
-            
-        }
+//        ref.observe(.value) { (snapshot) in
+//     
+//            for item in snapshot.children {
+//                //Получаем данные
+//                let userData = User(snapshot: item as! DataSnapshot)
+//                
+//                
+//                
+//                self.ref = Database.database().reference(withPath: "users").child(userData.surname.lowercased())
+//            }
+//            
+//            
+//            
+//        }
         
         ref.updateChildValues(["deviceUID": devicesUIDsArray[indexPath.row]])
         

@@ -69,6 +69,9 @@ class SignInViewController: UIViewController {
                 let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
                 guard let navVC = storyboard.instantiateViewController(identifier: "DeviceControlViewController") as? UINavigationController else { return }
             
+//                guard let deviceControlVC = navVC.viewControllers.first as? DeviceControlViewController else { return }
+//                deviceControlVC.surname = u
+                
                 self?.present(navVC, animated: true, completion: nil)
                 return
             }

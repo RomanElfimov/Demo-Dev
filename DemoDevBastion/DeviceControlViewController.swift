@@ -11,6 +11,8 @@ import Firebase
 
 class DeviceControlViewController: UITableViewController {
     
+    public var surname: String = ""
+    
     // MARK: - Private Properties
     private var ref: DatabaseReference!
     private var deviceUID: String = "" // при подключении напрямую приходит с предыдущего экрана, при автоматической авторизации приходит из Firebase
@@ -33,7 +35,9 @@ class DeviceControlViewController: UITableViewController {
     // Для получения данных создадим наблюдателя
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        ref = Database.database().reference(withPath: "users")
+        
+        guard let currentUser = Auth.auth().currentUser else { return }
+        ref = Database.database().reference(withPath: "users")//.child(currentUser.uid)
         
         ref.observe(.value) { (snapshot) in
             
@@ -44,11 +48,15 @@ class DeviceControlViewController: UITableViewController {
                 //Получаем данные
                 let userData = User(snapshot: item as! DataSnapshot)
 
-                uid = userData.deviceUID
-                level = userData.accessLevel
-                print("//--")
-                print(userData)
-                print("--//")
+                if userData.userID == currentUser.uid {
+                    uid = userData.deviceUID
+                    level = userData.accessLevel
+                    print("//--")
+                    print(userData)
+                    print("--//")
+                }
+                
+               
             }
             
             self.deviceUID = uid
