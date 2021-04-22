@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DATABASE_URL</key>
+	<string>https://demodevbastion-default-rtdb.firebaseio.com/</string>
+	<key>CLIENT_ID</key>
+	<string>1011670386650-6ne3a0puha3q3al8h03sev2ulm5vm7tq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1011670386650-6ne3a0puha3q3al8h03sev2ulm5vm7tq</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBFq8UcNtu2sMp3dUnkU8ZQP7WU7xo_5oU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1011670386650</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.RomanElfimov.DemoDevBastion</string>
+	<key>PROJECT_ID</key>
+	<string>demodevbastion</string>
+	<key>STORAGE_BUCKET</key>
+	<string>demodevbastion.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1011670386650:ios:a934799bbeb98e75f662e3</string>
+</dict>
+</plist>
