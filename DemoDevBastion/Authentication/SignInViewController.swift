@@ -10,6 +10,8 @@ import Firebase
 
 class SignInViewController: UIViewController {
 
+    private var ref: DatabaseReference!
+    private var deviceUID: String = ""
     // MARK: - Outlets
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -62,17 +64,43 @@ class SignInViewController: UIViewController {
             //Пользователь есть
             if user != nil {
                 
-                print("signInButtonTapped \(user)")
-                print(email)
-                print(password)
+                guard let currentUser = Auth.auth().currentUser else { return }
+                self?.ref = Database.database().reference(withPath: "users")//.child(currentUser.uid)
+                self?.ref.observe(.value) { (snapshot) in
+
+                    for item in snapshot.children {
+                        let userData = User(snapshot: item as! DataSnapshot) //получаем пользователя
+                        self?.deviceUID = userData.deviceUID // смотрbм deviceUID пользователя
+
+                        // Если deviceUID нету, предлагаем выбрать устройство из списка доступных
+
+                        if userData.userID == currentUser.uid {
+
+                            if self?.deviceUID == "" {
+
+                                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                                guard let navVC = storyboard.instantiateViewController(identifier: "ActiveDevicesListViewController") as? UINavigationController else { return }
+                                self?.present(navVC, animated: true, completion: nil)
+                            } else {
+
+                                // Если deviceUID есть, показываем экран управления
+                                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                                guard let navVC = storyboard.instantiateViewController(identifier: "DeviceControlViewController") as? UINavigationController else { return }
+                                self?.present(navVC, animated: true, completion: nil)
+                            }
+                        }
+                    }
+                }
                 
-                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-                guard let navVC = storyboard.instantiateViewController(identifier: "DeviceControlViewController") as? UINavigationController else { return }
-            
-//                guard let deviceControlVC = navVC.viewControllers.first as? DeviceControlViewController else { return }
-//                deviceControlVC.surname = u
-                
-                self?.present(navVC, animated: true, completion: nil)
+//
+//                print("signInButtonTapped \(user)")
+//                print(email)
+//                print(password)
+//
+//                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//                guard let navVC = storyboard.instantiateViewController(identifier: "DeviceControlViewController") as? UINavigationController else { return }
+//
+//                self?.present(navVC, animated: true, completion: nil)
                 return
             }
             //Пользователя нет

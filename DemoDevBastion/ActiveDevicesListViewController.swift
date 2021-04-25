@@ -11,6 +11,9 @@ import Firebase
 
 class ActiveDevicesListViewController: UIViewController {
     
+    // MARK: - Public Property
+    public var isDirectly: Bool = false // Если подключаемся напрямую
+    
     // MARK: - Private Properties
     private var mqtt: CocoaMQTT!
     private var devicesUIDsArray: [String] = [] // массив, т.к. устройств может быть несколько
@@ -111,25 +114,15 @@ extension ActiveDevicesListViewController: UITableViewDelegate, UITableViewDataS
         
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         guard let navVC = storyboard.instantiateViewController(identifier: "DeviceControlViewController") as? UINavigationController else { return }
+        guard let deviceControlVC = navVC.viewControllers.first as? DeviceControlViewController else { return }
         
-        
-//        ref.observe(.value) { (snapshot) in
-//     
-//            for item in snapshot.children {
-//                //Получаем данные
-//                let userData = User(snapshot: item as! DataSnapshot)
-//                
-//                
-//                
-//                self.ref = Database.database().reference(withPath: "users").child(userData.surname.lowercased())
-//            }
-//            
-//            
-//            
-//        }
-        
-        ref.updateChildValues(["deviceUID": devicesUIDsArray[indexPath.row]])
-        
+        if !isDirectly {
+            print(isDirectly)
+            ref.updateChildValues(["deviceUID": devicesUIDsArray[indexPath.row]])
+        } else {
+            deviceControlVC.isDirectly = true
+            deviceControlVC.devUID = devicesUIDsArray[indexPath.row]
+        }
         
         present(navVC, animated: true, completion: nil)
     }

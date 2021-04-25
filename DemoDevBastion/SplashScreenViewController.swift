@@ -19,6 +19,26 @@ class SplashScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        checkIsUserSignedIn()    
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func connectDirectlyButtonTapped(_ sender: Any) {
+        
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        guard let navVC = storyboard.instantiateViewController(identifier: "ActiveDevicesListViewController") as? UINavigationController else { return }
+        guard let activeDevicesVC = navVC.viewControllers.first as? ActiveDevicesListViewController else { return }
+        activeDevicesVC.isDirectly = true
+        present(navVC, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func unwind( _ seg: UIStoryboardSegue) {
+        checkIsUserSignedIn()
+    }
+    
+    private func checkIsUserSignedIn() {
         Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
             if user != nil {
                 
@@ -30,38 +50,30 @@ class SplashScreenViewController: UIViewController {
                     
                     for item in snapshot.children {
                         let userData = User(snapshot: item as! DataSnapshot) //получаем пользователя
-                        self?.deviceUID = userData.deviceUID // смотрем deviceUID пользователя
-                        
+                        self?.deviceUID = userData.deviceUID // смотрbм deviceUID пользователя
+            
                         // Если deviceUID нету, предлагаем выбрать устройство из списка доступных
-                        if self?.deviceUID == "" {
+                        
+                        if userData.userID == currentUser.uid {
                             
-                            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-                            guard let navVC = storyboard.instantiateViewController(identifier: "ActiveDevicesListViewController") as? UINavigationController else { return }
-                            self?.present(navVC, animated: true, completion: nil)
-                        } else {
-                            
-                            // TODO: Проверка включено ли устройство
-                            
-                            // Если deviceUID есть, показываем экран управления
-                            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-                            guard let navVC = storyboard.instantiateViewController(identifier: "DeviceControlViewController") as? UINavigationController else { return }
-                            self?.present(navVC, animated: true, completion: nil)
+                            if self?.deviceUID == "" {
+                        
+                                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                                guard let navVC = storyboard.instantiateViewController(identifier: "ActiveDevicesListViewController") as? UINavigationController else { return }
+                                self?.present(navVC, animated: true, completion: nil)
+                            } else {
+     
+                                // Если deviceUID есть, показываем экран управления
+                                let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                                guard let navVC = storyboard.instantiateViewController(identifier: "DeviceControlViewController") as? UINavigationController else { return }
+                                self?.present(navVC, animated: true, completion: nil)
+                            }
                         }
                     }
                 }
             }
         }
     }
-    
-    // MARK: - Actions
-    
-    @IBAction func connectDirectlyButtonTapped(_ sender: Any) {
-        
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        guard let navVC = storyboard.instantiateViewController(identifier: "ActiveDevicesListViewController") as? UINavigationController else { return }
-        present(navVC, animated: true, completion: nil)
-    }
-    
     
 }
 

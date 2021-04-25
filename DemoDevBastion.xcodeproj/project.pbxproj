@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A63304537CB3B7B1116CB9B4 /* Pods_DemoDevBastion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50F1C47F0933FBACA6C0808 /* Pods_DemoDevBastion.framework */; };
+		E9222DF32632FE31007513BE /* ForgetDirectlyDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9222DF22632FE31007513BE /* ForgetDirectlyDeviceViewController.swift */; };
 		E97D51BD262E9C6100DDEB3C /* DeviceControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D51BC262E9C6100DDEB3C /* DeviceControlViewController.swift */; };
 		E9B40853262DF0EC00C941A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B40852262DF0EC00C941A8 /* AppDelegate.swift */; };
 		E9B40855262DF0EC00C941A8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B40854262DF0EC00C941A8 /* SceneDelegate.swift */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		9B8A2A09E3C741ED99BD2B27 /* Pods-DemoDevBastion.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DemoDevBastion.debug.xcconfig"; path = "Target Support Files/Pods-DemoDevBastion/Pods-DemoDevBastion.debug.xcconfig"; sourceTree = "<group>"; };
 		A50F1C47F0933FBACA6C0808 /* Pods_DemoDevBastion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DemoDevBastion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9222DF22632FE31007513BE /* ForgetDirectlyDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetDirectlyDeviceViewController.swift; sourceTree = "<group>"; };
 		E97D51BC262E9C6100DDEB3C /* DeviceControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceControlViewController.swift; sourceTree = "<group>"; };
 		E9B4084F262DF0EC00C941A8 /* DemoDevBastion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoDevBastion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9B40852262DF0EC00C941A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				E9E9C559262F1F9000AFC400 /* PrivateOfficeTableViewController.swift */,
+				E9222DF22632FE31007513BE /* ForgetDirectlyDeviceViewController.swift */,
 			);
 			path = PrivateOffice;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				E9E9C54B262EC9B400AFC400 /* SignInViewController.swift in Sources */,
 				E9E9C532262EA90F00AFC400 /* Model.swift in Sources */,
 				E9B40853262DF0EC00C941A8 /* AppDelegate.swift in Sources */,
+				E9222DF32632FE31007513BE /* ForgetDirectlyDeviceViewController.swift in Sources */,
 				E9E9C55A262F1F9000AFC400 /* PrivateOfficeTableViewController.swift in Sources */,
 				E9E9C5D9262F440300AFC400 /* User.swift in Sources */,
 				E9E9C553262ECED300AFC400 /* SignUpTableViewController.swift in Sources */,
